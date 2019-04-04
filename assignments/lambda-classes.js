@@ -92,6 +92,11 @@ class Instructor extends Person {
    * @param {string} favLanguage - Instructor's favorite language i.e. 'Javascript'
    * @param {string} catchPhrase - Instructor's catch phrase i.e. 'This is super powerful'
    */
+  constructor (props) {
+    this.specialty = props.specialty;
+    this.favLanguage = props.favLanguage;
+    this.catchPhrase = props.catchPhrase;
+  }
 
    /**
     * Creates and logs a demo string
@@ -111,8 +116,48 @@ class Instructor extends Person {
    }
 }
 
-class ProjectManager {
+// #### Project Manager
 
+// * Now that we have instructors and students, we'd be nowhere without our PM's
+// * ProjectManagers are extensions of Instructors
+// * ProjectManagers have the following unique props:
+//   * `gradClassName`: i.e. CS1
+//   * `favInstructor`: i.e. Sean
+// * ProjectManagers have the following Methods:
+//   * `standUp` a method that takes in a slack channel and logs `{name} announces to {channel}, @channel standy times!​​​​​
+//   * `debugsCode` a method that takes in a student object and a subject and logs out `{name} debugs {student.name}'s code on {subject}`
+
+/**
+ * Class representing a project manager.
+ * @extends Instructor
+ */
+class ProjectManager extends Instructor {
+  /**
+   * Creates an instructor
+   * @param {string} gradClassName - Class the project manager was in i.e. CS1
+   * @param {string} favInstructor - Project manager's favorite instructor i.e. Josh Knell
+   */
+  constructor (props) {
+    this.gradClassName = props.gradClassName;
+    this.favInstructor = props.favInstructor;
+  }
+
+  /**
+   * Method that takes a slack channel and logs a channel message
+   * @param {string} channel - Slack channel to message
+   */
+  standUp(channel) {
+    return `${this.name} announces to ${channel}, @channel standup time!`;
+  }
+
+  /**
+   * Method that takes a student object and a subject and logs debugging message
+   * @param {object} student - Student instance that requires assistance debugging code.
+   * @param {string} subject - Name of the subject that the student is learning.
+   */
+  debugsCode(student, subject) {
+    return `${this.name} debugs ${student.name}'s code on ${subject}`;
+  }
 }
 
 class Student {
