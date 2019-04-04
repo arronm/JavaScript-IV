@@ -116,24 +116,13 @@ class Instructor extends Person {
    }
 }
 
-// #### Project Manager
-
-// * Now that we have instructors and students, we'd be nowhere without our PM's
-// * ProjectManagers are extensions of Instructors
-// * ProjectManagers have the following unique props:
-//   * `gradClassName`: i.e. CS1
-//   * `favInstructor`: i.e. Sean
-// * ProjectManagers have the following Methods:
-//   * `standUp` a method that takes in a slack channel and logs `{name} announces to {channel}, @channel standy times!​​​​​
-//   * `debugsCode` a method that takes in a student object and a subject and logs out `{name} debugs {student.name}'s code on {subject}`
-
 /**
  * Class representing a project manager.
  * @extends Instructor
  */
 class ProjectManager extends Instructor {
   /**
-   * Creates an instructor
+   * Creates an instructor.
    * @param {string} gradClassName - Class the project manager was in i.e. CS1
    * @param {string} favInstructor - Project manager's favorite instructor i.e. Josh Knell
    */
@@ -160,6 +149,61 @@ class ProjectManager extends Instructor {
   }
 }
 
-class Student {
+// * Now we need some students!
+// * Student uses the same attributes that have been set up by Person
+// * Student has the following unique props:
+//   * `previousBackground` i.e. what the Student used to do before Lambda School
+//   * `className` i.e. CS132
+//   * `favSubjects`. i.e. an array of the student's favorite subjects ['Html', 'CSS', 'JavaScript']
+// * Student has the following methods:
+//   * `listsSubjects` a method that logs out all of the student's favoriteSubjects one by one.
+//   * `PRAssignment` a method that receives a subject as an argument and logs out that the `student.name has submitted a PR for {subject}`
+//   * `sprintChallenge` similar to PRAssignment but logs out `student.name has begun sprint challenge on {subject}`
 
+/**
+ * Class representing a student.
+ * @extends Person
+ */
+class Student extends Person {
+
+  /**
+   * Creates a student.
+   * @param {object} props - Properties to initialize the component with
+   * @param {string} props.previousBackground - What the student used to do before Lambda School.
+   * @param {string} props.className - Class the student is enrolled in i.g. Web19.
+   * @param {string[]} props.favSubjects - An array of the student's favorite subjects e.g. ['Html', 'CSS', 'JavaScript'].
+   */
+  constructor (props) {
+    this.previousBackground = props.previousBackground;
+    this.className = props.className;
+    this.favSubjects = props.favSubjects;
+  }
+
+  /**
+   * Method that iterates over a student's favorite subjects and logs them out
+   * @return {undefined}
+   */
+  listsSubjects() {
+    this.favSubjects.forEach((subject) => {
+      console.log(subject);
+    });
+  }
+
+  /**
+   * Method which will log out that a student has submitted a pull request for the subject they're studying
+   * @param {string} subject - Subject the student is submitting a pull request for
+   * @return {undefined}
+   */
+  prAssignment(subject) {
+    console.log(`${this.name} has submitted a PR for ${subject}`);
+  }
+
+  /**
+   * Method which will log out that a student has started a sprint challenge for the subject they're studying
+   * @param {string} subject - Subject the student is starting their sprint challenge for
+   * @return {undefined}
+   */
+  sprintChallenge(subject) {
+    console.log(`${this.name} has begun sprint challenge on ${subject}`);
+  }
 }
