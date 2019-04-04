@@ -60,10 +60,10 @@
 class Person {
   /**
    * Create a person
-   * @param {name} name - The person's name.
-   * @param {age} age - The person's age.
-   * @param {location} location - The person's location.
-   * @param {gender} gender - The person's gender.
+   * @param {string} name - The person's name.
+   * @param {number} age - The person's age.
+   * @param {string} location - The person's location.
+   * @param {string} gender - The person's gender.
    */
   constructor (props) {
     this.name = props.name;
@@ -81,8 +81,34 @@ class Person {
   }
 }
 
-class Instructor {
+/**
+ * Class representing an instructor
+ * @extends Person
+ */
+class Instructor extends Person {
+  /**
+   * Create an instructor.
+   * @param {string} specialty - What the Instructor is good at i.e. 'redux'
+   * @param {string} favLanguage - Instructor's favorite language i.e. 'Javascript'
+   * @param {string} catchPhrase - Instructor's catch phrase i.e. 'This is super powerful'
+   */
 
+   /**
+    * Creates and logs a demo string
+    * @param {string} subject - Subject for the demo being given i.e. 'Javascript III',
+    */
+   demo(subject) {
+     return `Today we are learning about ${subject}`;
+   }
+
+   /**
+    * Logs out a student's grade on a specific subject.
+    * @param {string} student - Name of the student being graded.
+    * @param {string} subject - Subject the student is being graded on.
+    */
+   grade() {
+     return `${student} receives a perfect score on ${subject}`
+   }
 }
 
 class ProjectManager {
