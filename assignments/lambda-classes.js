@@ -60,10 +60,11 @@
 class Person {
   /**
    * Create a person
-   * @param {string} name - The person's name.
-   * @param {number} age - The person's age.
-   * @param {string} location - The person's location.
-   * @param {string} gender - The person's gender.
+   * @param {object} props - Properties to initialize the class with.
+   * @param {string} props.name - The person's name.
+   * @param {number} props.age - The person's age.
+   * @param {string} props.location - The person's location.
+   * @param {string} props.gender - The person's gender.
    */
   constructor (props) {
     this.name = props.name;
@@ -73,24 +74,25 @@ class Person {
   }
 
   /**
-   * Get a cordial greeting based on instance properties
-   * @return {string} A cordial greeting with name and location.
+   * Log a cordial greeting based on instance properties.
+   * @return {undefined}
    */
   speak() {
-    return `Hello my name is ${this.name}, I am from ${this.location}`;
+    console.log(`Hello my name is ${this.name}, I am from ${this.location}`);
   }
 }
 
 /**
- * Class representing an instructor
+ * Class representing an instructor.
  * @extends Person
  */
 class Instructor extends Person {
   /**
    * Create an instructor.
-   * @param {string} specialty - What the Instructor is good at i.e. 'redux'
-   * @param {string} favLanguage - Instructor's favorite language i.e. 'Javascript'
-   * @param {string} catchPhrase - Instructor's catch phrase i.e. 'This is super powerful'
+   * @param {object} props - Properties to initialize the class with.
+   * @param {string} props.specialty - What the Instructor is good at e.g. 'redux'.
+   * @param {string} props.favLanguage - Instructor's favorite language e.g. 'Javascript'.
+   * @param {string} props.catchPhrase - Instructor's catch phrase e.g. 'This is super powerful'.
    */
   constructor (props) {
     this.specialty = props.specialty;
@@ -99,17 +101,19 @@ class Instructor extends Person {
   }
 
    /**
-    * Creates and logs a demo string
-    * @param {string} subject - Subject for the demo being given i.e. 'Javascript III',
+    * Creates and logs a demo string.
+    * @param {string} subject - Subject for the demo being given e.g. 'Javascript III'.
+    * @return {undefined}
     */
    demo(subject) {
-     return `Today we are learning about ${subject}`;
+     console.log(`Today we are learning about ${subject}`);
    }
 
    /**
     * Logs out a student's grade on a specific subject.
     * @param {string} student - Name of the student being graded.
     * @param {string} subject - Subject the student is being graded on.
+    * @return {undefined}
     */
    grade() {
      return `${student} receives a perfect score on ${subject}`
@@ -123,8 +127,9 @@ class Instructor extends Person {
 class ProjectManager extends Instructor {
   /**
    * Creates an instructor.
-   * @param {string} gradClassName - Class the project manager was in i.e. CS1
-   * @param {string} favInstructor - Project manager's favorite instructor i.e. Josh Knell
+   * @param {object} props - Properties to initialize the class with.
+   * @param {string} props.gradClassName - Class the project manager was in e.g. CS1.
+   * @param {string} props.favInstructor - Project manager's favorite instructor e.g. Josh Knell.
    */
   constructor (props) {
     this.gradClassName = props.gradClassName;
@@ -132,43 +137,33 @@ class ProjectManager extends Instructor {
   }
 
   /**
-   * Method that takes a slack channel and logs a channel message
-   * @param {string} channel - Slack channel to message
+   * Method that takes a slack channel and logs a channel message.
+   * @param {string} channel - Slack channel to message.
+   * @return {undefined}
    */
   standUp(channel) {
-    return `${this.name} announces to ${channel}, @channel standup time!`;
+    console.log(`${this.name} announces to ${channel}, @channel standup time!`);
   }
 
   /**
-   * Method that takes a student object and a subject and logs debugging message
+   * Method that takes a student object and a subject and logs debugging message.
    * @param {object} student - Student instance that requires assistance debugging code.
    * @param {string} subject - Name of the subject that the student is learning.
+   * @return {undefined}
    */
   debugsCode(student, subject) {
-    return `${this.name} debugs ${student.name}'s code on ${subject}`;
+    console.log(`${this.name} debugs ${student.name}'s code on ${subject}`);
   }
 }
-
-// * Now we need some students!
-// * Student uses the same attributes that have been set up by Person
-// * Student has the following unique props:
-//   * `previousBackground` i.e. what the Student used to do before Lambda School
-//   * `className` i.e. CS132
-//   * `favSubjects`. i.e. an array of the student's favorite subjects ['Html', 'CSS', 'JavaScript']
-// * Student has the following methods:
-//   * `listsSubjects` a method that logs out all of the student's favoriteSubjects one by one.
-//   * `PRAssignment` a method that receives a subject as an argument and logs out that the `student.name has submitted a PR for {subject}`
-//   * `sprintChallenge` similar to PRAssignment but logs out `student.name has begun sprint challenge on {subject}`
 
 /**
  * Class representing a student.
  * @extends Person
  */
 class Student extends Person {
-
   /**
    * Creates a student.
-   * @param {object} props - Properties to initialize the component with
+   * @param {object} props - Properties to initialize the class with.
    * @param {string} props.previousBackground - What the student used to do before Lambda School.
    * @param {string} props.className - Class the student is enrolled in i.g. Web19.
    * @param {string[]} props.favSubjects - An array of the student's favorite subjects e.g. ['Html', 'CSS', 'JavaScript'].
@@ -180,7 +175,7 @@ class Student extends Person {
   }
 
   /**
-   * Method that iterates over a student's favorite subjects and logs them out
+   * Method that iterates over a student's favorite subjects and logs them out.
    * @return {undefined}
    */
   listsSubjects() {
@@ -190,8 +185,8 @@ class Student extends Person {
   }
 
   /**
-   * Method which will log out that a student has submitted a pull request for the subject they're studying
-   * @param {string} subject - Subject the student is submitting a pull request for
+   * Method which will log out that a student has submitted a pull request for the subject they're studying.
+   * @param {string} subject - Subject the student is submitting a pull request for.
    * @return {undefined}
    */
   prAssignment(subject) {
@@ -199,8 +194,8 @@ class Student extends Person {
   }
 
   /**
-   * Method which will log out that a student has started a sprint challenge for the subject they're studying
-   * @param {string} subject - Subject the student is starting their sprint challenge for
+   * Method which will log out that a student has started a sprint challenge for the subject they're studying.
+   * @param {string} subject - Subject the student is starting their sprint challenge for.
    * @return {undefined}
    */
   sprintChallenge(subject) {
