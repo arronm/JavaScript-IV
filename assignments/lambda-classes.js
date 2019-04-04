@@ -53,3 +53,42 @@
 */
 
 // CODE here for your Lambda Classes
+
+/**
+ * Class representing a person.
+ */
+class Person {
+  /**
+   * Create a person
+   * @param {name} name - The person's name.
+   * @param {age} age - The person's age.
+   * @param {location} location - The person's location.
+   * @param {gender} gender - The person's gender.
+   */
+  constructor (props) {
+    this.name = props.name;
+    this.age = props.age;
+    this.location = props.location;
+    this.gender = props.gender;
+  }
+
+  /**
+   * Get a cordial greeting based on instance properties
+   * @return {string} A cordial greeting with name and location.
+   */
+  speak() {
+    return `Hello my name is ${this.name}, I am from ${this.location}`;
+  }
+}
+
+class Instructor {
+
+}
+
+class ProjectManager {
+
+}
+
+class Student {
+
+}
