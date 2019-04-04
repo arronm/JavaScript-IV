@@ -82,6 +82,16 @@ class Person {
   }
 }
 
+// Test log for grading
+const person = new Person({
+  name: 'Person',
+  age: 99,
+  location: 'Generic Place',
+  gender: 'Unknown',
+});
+console.log(person);
+person.speak();
+
 /**
  * Class representing an instructor.
  * @extends Person
@@ -95,6 +105,7 @@ class Instructor extends Person {
    * @param {string} props.catchPhrase - Instructor's catch phrase e.g. 'This is super powerful'.
    */
   constructor (props) {
+    super(props);
     this.specialty = props.specialty;
     this.favLanguage = props.favLanguage;
     this.catchPhrase = props.catchPhrase;
@@ -106,19 +117,40 @@ class Instructor extends Person {
     * @return {undefined}
     */
    demo(subject) {
-     console.log(`Today we are learning about ${subject}`);
+     console.log(`Today we are learning about ${subject}.`);
    }
 
    /**
-    * Logs out a student's grade on a specific subject.
-    * @param {string} student - Name of the student being graded.
+    * Updates student's grade based on pseudo randomness, logs result
+    * @param {object} student - Object instance of the student being graded.
     * @param {string} subject - Subject the student is being graded on.
     * @return {undefined}
     */
-   grade() {
-     return `${student} receives a perfect score on ${subject}`
+   grade(student, subject) {
+    let pseudoRandomGrade = Math.floor(Math.random() * 60) + 40;
+
+    if (student.name === 'Arron Marshall') {
+      pseudoRandomGrade = Math.floor(Math.random() * 5) + 95;
+    }
+
+    student.grade = pseudoRandomGrade;
+    console.log(`${this.name} has given ${student.name} a ${pseudoRandomGrade} on their ${subject} assignment.`);
    }
 }
+
+// Test log for grading
+const instructor = new Instructor({
+  name: 'Instructor',
+  age: 99,
+  location: 'Generic Place',
+  gender: 'Unknown',
+  specialty: 'React',
+  favLanguage: 'Javascript',
+  catchPhrase: 'I love to learn!',
+});
+console.log(instructor);
+instructor.speak();
+instructor.demo('Javascript');
 
 /**
  * Class representing a project manager.
@@ -132,6 +164,7 @@ class ProjectManager extends Instructor {
    * @param {string} props.favInstructor - Project manager's favorite instructor e.g. Josh Knell.
    */
   constructor (props) {
+    super(props);
     this.gradClassName = props.gradClassName;
     this.favInstructor = props.favInstructor;
   }
@@ -156,6 +189,23 @@ class ProjectManager extends Instructor {
   }
 }
 
+// Test log for grading
+const projectManager = new ProjectManager({
+  name: 'Project Manager',
+  age: 99,
+  location: 'Generic Place',
+  gender: 'Unknown',
+  specialty: 'React',
+  favLanguage: 'Javascript',
+  catchPhrase: 'I love to learn!',
+  gradClassName: 'CS1',
+  favInstructor: 'That Guy',
+});
+console.log(projectManager);
+projectManager.speak();
+projectManager.demo('Javascript');
+projectManager.standUp('web19_project-manager');
+
 /**
  * Class representing a student.
  * @extends Person
@@ -167,11 +217,14 @@ class Student extends Person {
    * @param {string} props.previousBackground - What the student used to do before Lambda School.
    * @param {string} props.className - Class the student is enrolled in i.g. Web19.
    * @param {string[]} props.favSubjects - An array of the student's favorite subjects e.g. ['Html', 'CSS', 'JavaScript'].
+   * @param {number} props.grade - Current grade of the student.
    */
   constructor (props) {
+    super(props);
     this.previousBackground = props.previousBackground;
     this.className = props.className;
     this.favSubjects = props.favSubjects;
+    this.grade = props.grade;
   }
 
   /**
@@ -201,4 +254,58 @@ class Student extends Person {
   sprintChallenge(subject) {
     console.log(`${this.name} has begun sprint challenge on ${subject}`);
   }
+
+  /**
+   * Method that will continue working on assignments until student can graduate from that subject.
+   * @param {object} projectManager - The student's project manager.
+   * @param {string} subject - Subject the student is currently studying.
+   * @return {undefined}
+   */
+  graduate(projectManager, subject) {
+    while (this.grade < 70) {
+      console.log(`${this.name} needs to study ${subject} to attain a higher grade.`);
+      projectManager.grade(this, subject);
+    }
+    console.log(`${this.name} has graduated from ${subject}, and thanks ${projectManager.name} for all of the help!`);
+  }
 }
+
+// Test log for grading
+const student = new Student({
+  name: 'Student',
+  age: 99,
+  location: 'Generic Place',
+  gender: 'Unknown',
+  previousBackground: 'Unknown',
+  className: 'Web19',
+  favSubjects: ['React', 'Regx', 'Binary'],
+  grade: 0,
+});
+console.log(student);
+student.speak();
+projectManager.debugsCode(student, 'Javascript');
+
+const Jamie = new ProjectManager({
+  name: 'Jamie',
+  age: 40,
+  location: 'Michigan',
+  gender: 'Male',
+  specialty: 'Javascript',
+  favLanguage: 'Javascript',
+  catchPhrase: 'Standup Time!',
+  gradClassName: 'Web16',
+  favInstructor: 'Josh Knell'
+});
+
+const Arron = new Student({
+  name: 'Arron Marshall',
+  age: 32,
+  location: 'California',
+  gender: 'Male',
+  previousBackground: 'Full-stack Developer',
+  className: 'Web19',
+  favSubjects: ['JavaScript', 'CSS', 'React', 'Machine Learning'],
+  grade: 0,
+})
+
+Arron.graduate(Jamie, 'Javascript');
